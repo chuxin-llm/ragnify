@@ -1,0 +1,228 @@
+database:
+
+  root_path:
+  # 「本地」数据库地址
+  # Type: str
+  # ENV Variable: APP_DATABASE_PATH
+
+vector_store:
+  # 向量数据库参数
+
+  type:
+  # 向量数据库类型，可选项：{milvus, chroma}.
+  # Type: str
+  # ENV Variable: APP_VECTOR_STORE_TYPE
+
+  name: rag
+  # 向量数据库名称
+  # Type: str
+  # ENV Variable: APP_VECTOR_STORE_NAME
+
+  host:
+  # 向量数据库ip地址.
+  # Type: str
+  # ENV Variable: APP_VECTOR_STORE_HOST
+
+  port:
+  # 向量数据库连接端口
+  # Type: str
+  # ENV Variable: APP_VECTOR_STORE_PORT
+
+  user:
+  # 向量数据库连接用户名
+  # Type: str
+  # ENV Variable: APP_VECTOR_STORE_USER
+
+  password:
+  # 向量数据库连接密码
+  # Type: str
+  # ENV Variable: APP_VECTOR_STORE_PASSWORD
+
+  kwargs: {
+      "search_params":{"metric_type": "IP"},
+      "index_params":{"metric_type": "IP", "index_type":"HNSW", "params": {"M": 8, "efConstruction": 64}}
+  }
+  # 向量数据库配置信息，兼容不同类型数据库需求
+  # Type: str
+  # ENV Variable: APP_VECTOR_STORE_KWARGS
+
+
+llm:
+  # 大模型服务配置参数
+  api_key:
+  # 大模型推理服务api_key, 仅在调用OPENAI服务时需要提供
+  # Type: str
+  # ENV Variable: APP_LLM_API_KEY
+
+  ip:
+  # 大模型推理服务IP
+  # Type: str
+  # ENV Variable: APP_LLM_IP
+
+  port:
+  # 大模型推理服务端口
+  # Type: str
+  # ENV Variable: APP_LLM_PORT
+
+  grpc_port:
+  # 大模型推理服务grpc端口（预留参数，默认无需配置）
+  # Type: str
+  # ENV Variable: APP_LLM_GRPC_PORT
+
+  model_name:
+  # 大模型名称.
+  # Type: str
+  # ENV Variable: APP_LLM_MODEL_NAME
+
+  model_engine:
+  # 推理引擎类型（backend），可选项有{nvidia: nv-gpu；openai: openai在线服务}
+  # Type: str
+  # ENV Variable: APP_LLM_MODEL_ENGINE
+
+text_splitter:
+  # The configuration for the Text Splitter.
+
+  splitter_name: ChineseRecursiveTextSplitter
+  # splitter class name.
+  # Type: str
+  # ENV Variable: APP_TEXT_SPLITTER_SPLITTER_NAME
+
+  chunk_size: 500
+  # Chunk size.
+  # Type: int
+  # ENV Variable: APP_TEXT_SPLITTER_CHUNK_SIZE
+
+  chunk_overlap: 50
+  # Overlapping text length for splitting.
+  # Type: int
+  # ENV Variable: APP_TEXT_SPLITTER_CHUNK_OVERLAP
+
+  smaller_chunk_size: 0
+  # >= 0的整数； 设置为0代表不开启 smaller-chunk
+  # Type: int
+  # ENV Variable: APP_TEXT_SPLITTER_SMALLER_CHUNK_SIZE
+
+  summary: 0
+  # 是否开启summary
+  # Type: int
+  # ENV Variable: APP_TEXT_SPLITTER_SUMMARY
+
+embeddings:
+  # The configuration embedding models.
+
+  model_name_or_path:
+  # The name embedding search model from {huggingface, ...} or local model path.
+  # Type: str
+  # ENV Variable: APP_EMBEDDINGS_MODEL_NAME_OR_PATH
+
+  dimensions:
+  # The dimensions of the embedding search model from huggingface.
+  # Type: int
+  # ENV Variable: APP_EMBEDDINGS_DIMENSIONS
+
+  model_engine: huggingface
+  # The backend name hosting the model, huggingface, openai are supported.
+  # Type: str
+  # ENV Variable: APP_EMBEDDINGS_MODEL_ENGINE
+
+reranker:
+  # The configuration embedding models.
+
+  model_name_or_path:
+  # The name rerank model from {huggingface, ...} or local model path.
+  # Type: str
+  # ENV Variable: APP_RERANKER_MODEL_NAME_OR_PATH
+
+  type: rank
+  # The rank model type.
+  # Type: str
+  # ENV Variable: APP_RERANKER_TYPE
+
+prompts:
+  # The configuration for the prompts used for response generation.
+
+  chat_template:  <指令> 你是一个乐于助人、尊重他人、诚实的助手。在安全的情况下，请尽可能提供帮助。请确保你的回答是积极的。</指令>\n已知信息： {context} \n问题： {query} \n答案：
+  # The chat prompt template guides the model to generate responses for queries.
+  # Type: str
+  # ENV Variable: APP_PROMPTS_CHAT_TEMPLATE
+
+  rag_template: <指令> 根据已知信息，简洁和专业的来回答问题。若问题包含多个子问题，每个子问题都要给出答案。如果无法从中得到答案，请说 “根据已知信息无法回答该问题”，不允许在答案中添加编造成分，不要总结归纳，答案请使用中文。</指令>\n已知信息：{context} \n问题： {query} \n答案：
+  # The RAG prompt template instructs the model to generate responses for queries while utilizing knowledge base.
+  # Type: str
+  # ENV Variable: APP_PROMPTS_RAG_TEMPLATE
+
+
+server:
+
+  api_server_host: 0.0.0.0
+  # Api Server host
+  # Type: str
+  # ENV Variable: APP_SERVER_API_SERVER_HOST
+
+  api_server_port: 7861
+  # Api Server port
+  # Type: int
+  # ENV Variable: APP_SERVER_API_SERVER_PORT
+
+  web_server_port: 9003
+  # Web Server port
+  # Type: int
+  # ENV Variable: APP_SERVER_WEB_SERVER_PORT
+
+
+langfuse:
+
+  langfuse_secret_key:
+  # Type: str
+  # ENV Variable: APP_LANGFUSE_LANGFUSE_SECRET_KEY
+
+  langfuse_public_key:
+  # Type: str
+  # ENV Variable: APP_LANGFUSE_LANGFUSE_PUBLIC_KEY
+
+  langfuse_host:
+  # Type: str
+  # ENV Variable: APP_LANGFUSE_LANGFUSE_HOST
+
+
+knowledge_graph:
+
+  type:
+  # 图数据库类型，可选项：{nebula}.
+  # Type: str
+  # ENV Variable: APP_KNOWLEDGE_GRAPH_TYPE
+
+  ip:
+  # 图数据库ip地址.
+  # Type: str
+  # ENV Variable: APP_KNOWLEDGE_GRAPH_IP
+
+  port:
+  # 图数据库连接端口
+  # Type: str
+  # ENV Variable: APP_KNOWLEDGE_GRAPH_PORT
+
+  username:
+  # 图数据库连接用户名
+  # Type: str
+  # ENV Variable: APP_KNOWLEDGE_GRAPH_USERNAME
+
+  password:
+  # 图数据库连接密码
+  # Type: str
+  # ENV Variable: APP_KNOWLEDGE_GRAPH_PASSWORD
+
+  gql_generation_template:
+  # 图数据查询命令生成prompt模板
+  # Type: str
+  # ENV Variable: APP_KNOWLEDGE_GRAPH_GQL_GENERATION_TEMPLATE
+
+  kwargs: {
+    "space": MedicaKG,
+    "session_pool_size": 30
+  }
+  # 向量数据库配置信息，兼容不同类型数据库需求
+  # Type: str
+  # ENV Variable: APP_KNOWLEDGE_GRAPH_KWARGS
+
+
