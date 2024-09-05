@@ -33,7 +33,7 @@ RAGNIFY部署需要经过以下四个步骤：
 3. 执行以下命令，拉取仓库：
 
    ```Shell
-   git clone https://github.com/chuxin-llm/RAGNIFY.git
+   git clone https://github.com/chuxin-llm/ragnify.git
    ```
 
 4. 执行以下命令，进入目录：
