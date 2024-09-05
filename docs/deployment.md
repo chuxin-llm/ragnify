@@ -39,7 +39,7 @@ RAGNIFY部署需要经过以下四个步骤：
 4. 执行以下命令，进入目录：
 
    ```Shell
-   cd RAGNIFY/
+   cd ragnify/
    ```
 
 5. 执行以下命令，安装环境依赖：
@@ -123,7 +123,7 @@ RAGNIFY支持原生Web UI和定制UI的两种方式进行使用。
 1. 执行以下命令，一键式启动原生Web UI服务：
 
    ```Shell
-   cd RAGNIFY/
+   cd ragnify/
    python start.py
    ```
 
@@ -154,7 +154,7 @@ RAGNIFY支持原生Web UI和定制UI的两种方式进行使用。
 **说明**：如果已经启动了原生Web UI，则后端API服务的端口不能和Web UI服务的端口重合。
 
 ```Shell
-cd RAGNIFY
+cd ragnify
 python server/main.py --host 0.0.0.0 --port <SERVER_PORT> --create_tables
 ```
 
@@ -187,7 +187,7 @@ python server/main.py --host 0.0.0.0 --port <SERVER_PORT> --create_tables
 1. 执行以下命令，对RAGNIFY应用进行打包：
 
    ```shell
-   cd RAGNIFY
+   cd ragnify
    bash build.sh
    ```
 
