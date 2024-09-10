@@ -8,6 +8,7 @@ from langchain_community.embeddings import (
     HuggingFaceBgeEmbeddings
 )
 from rag.common.utils import logger
+from rag.common.configuration import settings
 
 
 class LocalEmbeddings(Embeddings):
@@ -22,8 +23,8 @@ class LocalEmbeddings(Embeddings):
 
     def _init_embedding_model(self):
         model_kwargs = {"device": "cpu"}
-        if torch.cuda.is_available():
-            model_kwargs["device"] = "cuda"
+        if torch.cuda.is_available() and 'cuda' in settings.embeddings.device:
+            model_kwargs["device"] = settings.embeddings.device
         encode_kwargs = {"normalize_embeddings": True}
 
         logger.info(f"Using {self.model_engine} as model engine to load embeddings")

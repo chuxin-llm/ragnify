@@ -9,6 +9,7 @@ from transformers import (
 )
 
 from langchain_core.documents import Document
+from rag.common.configuration import settings
 
 
 class Reranker:
@@ -30,10 +31,9 @@ class Reranker:
 
         self.need_activate = True if "bce" in model_name_or_path.lower() else False
 
-        if torch.cuda.is_available():
-            self.device = torch.device('cuda')
-        elif torch.backends.mps.is_available():
-            self.device = torch.device('mps')
+        pointed_device = settings.reranker.device
+        if torch.cuda.is_available() and "cuda" in pointed_device:
+            self.device = torch.device(pointed_device)
         else:
             self.device = torch.device('cpu')
             use_fp16 = False
@@ -43,18 +43,12 @@ class Reranker:
         self.model = self.model.to(self.device)
         self.model.eval()
 
-        self.num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 0
-        if self.num_gpus > 1:
-            self.model = torch.nn.DataParallel(self.model)
-
     @torch.no_grad()
     def compute_score(self,
                       sentence_pairs: Union[List[Tuple[str, str]], Tuple[str, str]],
                       batch_size: int = 256,
                       max_length: int = 512,
                       enable_tqdm: bool=False,) -> List[float]:
-        if self.num_gpus > 0:
-            batch_size = batch_size * self.num_gpus
 
         assert isinstance(sentence_pairs, list)
         if isinstance(sentence_pairs[0], str):
@@ -113,10 +107,9 @@ class LLMReranker:
 
         self.yes_loc = self.tokenizer('Yes', add_special_tokens=False)['input_ids'][0]
 
-        if torch.cuda.is_available():
-            self.device = torch.device('cuda')
-        elif torch.backends.mps.is_available():
-            self.device = torch.device('mps')
+        pointed_device = settings.reranker.device
+        if torch.cuda.is_available() and "cuda" in pointed_device:
+            self.device = torch.device(pointed_device)
         else:
             self.device = torch.device('cpu')
             use_fp16 = False
@@ -125,10 +118,6 @@ class LLMReranker:
 
         self.model = self.model.to(self.device)
         self.model.eval()
-
-        self.num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 0
-        if self.num_gpus > 1:
-            self.model = torch.nn.DataParallel(self.model)
 
     def _get_inputs(self, pairs, tokenizer, prompt=None, max_length=1024):
         if prompt is None:

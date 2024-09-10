@@ -138,10 +138,10 @@ class EmbeddingConfig(ConfigWizard):
         default="huggingface",
         help_txt="The server type of the hosted model. Allowed values are hugginface",
     )
-    dimensions: int = configfield(
-        "dimensions",
-        default=1024,
-        help_txt="The required dimensions of the embedding model. Currently utilized for vector DB indexing.",
+    device: str = configfield(
+        "device",
+        default="cuda:0",
+        help_txt="The device to load model",
     )
 
 @configclass
@@ -157,6 +157,11 @@ class RerankConfig(ConfigWizard):
         "type",
         default="rank",
         help_txt="The type of the rerank model. Allowed values are {rank, llm}",
+    )
+    device: str = configfield(
+        "device",
+        default="cuda:0",
+        help_txt="The device to load model",
     )
 
 

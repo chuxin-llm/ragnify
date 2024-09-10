@@ -115,15 +115,15 @@ embeddings:
   # Type: str
   # ENV Variable: APP_EMBEDDINGS_MODEL_NAME_OR_PATH
 
-  dimensions:
-  # The dimensions of the embedding search model from huggingface.
-  # Type: int
-  # ENV Variable: APP_EMBEDDINGS_DIMENSIONS
-
   model_engine: huggingface
   # The backend name hosting the model, huggingface, openai are supported.
   # Type: str
   # ENV Variable: APP_EMBEDDINGS_MODEL_ENGINE
+
+  device: "cuda:0"
+  # The device to load model.
+  # Type: str
+  # ENV Variable: APP_EMBEDDINGS_DEVICE
 
 reranker:
   # The configuration embedding models.
@@ -137,6 +137,11 @@ reranker:
   # The rank model type.
   # Type: str
   # ENV Variable: APP_RERANKER_TYPE
+
+  device: "cuda:0"
+  # The device to load model.
+  # Type: str
+  # ENV Variable: APP_RERANKER_DEVICE
 
 prompts:
   # The configuration for the prompts used for response generation.
