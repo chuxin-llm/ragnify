@@ -29,14 +29,11 @@
 
 大模型推理服务支持配置的参数如下：
 
-| 参数名称     | 类型 | 默认值     | 环境变量名称               | 是否需要自定义 | 说明                                                                                                                                                                                                                                                        |
-| :----------- | :--- |:--------|:---------------------| :------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| api_key      | str  | -       | APP_LLM_API_KEY      | -              | OpenAI API密钥，仅在接入OpenAI在线推理服务时需要配置。                                                                                                                                                                                                                       |
-| ip           | str  | 0.0.0.0 | APP_LLM_IP           | ✅              | 大模型推理服务IP。                                                                                                                                                                                                                                                |
-| port         | str  | -       | APP_LLM_PORT         | ✅              | 大模型推理服务端口。                                                                                                                                                                                                                                                |
-| grpc_port    | str  | -       | APP_LLM_GRPC_PORT    | -              | 大模型推理服务GRPC端口。（预留端口，默认不需要配置）                                                                                                                                                                                                                              |
-| model_name   | str  | -       | APP_LLM_MODEL_NAME   | ✅              | 大模型名称。                                                                                                                                                                                                                                                    |
-| model_engine | str  | nvidia  | APP_LLM_MODEL_ENGINE | ✅              | 推理引擎类型（backend）。<br>**nvidia**：NVIDIA算力卡。需要正确配置``ip``、``port``、``model_name``。<br>**openai**：OpenAI在线推理服务。需要正确配置``api_key``、``model_name``，并且请确认``model_name``指定的模型有权限调用（账户无欠费等问题）。 |
+| 参数名称         | 类型 | 默认值    | 环境变量名称               | 是否需要自定义 | 说明                |
+|:-------------| :--- |:-------|:---------------------| :------------- |:------------------|
+| api_key      | str  | -      | APP_LLM_API_KEY      | -              | 大模型推理服务 apikey。   |
+| base_url     | str  | -      | APP_LLM_BASE_URL     | ✅              | 大模型推理服务 base_url。 |
+| model_name   | str  | -      | APP_LLM_MODEL_NAME   | ✅              | 大模型名称。            |
 
 ## 3 text_splitter
 
@@ -102,15 +99,15 @@ Embedding模型用于将文本向量化，支持配置的参数如下：
 
 
 ### 下载模型
+**强烈推荐您试用我们自研的[Chuxin-Embedding](https://huggingface.co/chuxin-llm/Chuxin-Embedding)模型**
 
-您可以选择下载主流的开源embedding模型，例如：
+您也可以选择下载其它主流的开源模型，例如：
 
 | 模型名称              | 语言 | 模型链接                                                     |
 | :-------------------- | :--- | :----------------------------------------------------------- |
 | bge-large-zh          | 中文 | [HF国内站（推荐）](https://hf-mirror.com/BAAI/bge-large-zh)  |
 | bce-embedding-base_v1 | 中英 | [HF国内站（推荐）](https://hf-mirror.com/maidalun1020/bce-embedding-base_v1) |
 
-**我们强烈推荐您试用我们自研的[Chuxin-Embedding](https://huggingface.co/chuxin-llm/Chuxin-Embedding)模型**
 
 #### 下载步骤
 
