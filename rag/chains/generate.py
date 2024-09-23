@@ -15,7 +15,7 @@ from langchain.prompts.chat import ChatPromptTemplate
 @dataclass
 class GenerateChain(BaseGenerationChain):
     llm: Union[LLM, BaseChatModel]
-    stream = False
+    stream: bool = False
 
     def augment(self, query: str,
                 docs: List[Document]):
