@@ -23,10 +23,6 @@ def get_embedding_model(model_name_or_path, model_engine) -> Embeddings:
         raise RuntimeError("Unable to find any supported embedding model. Supported engine is huggingface.")
 
 
-# embedding_model = get_embedding_model(settings.embeddings.model_name_or_path,
-#                                       settings.embeddings.model_engine)
-
-
 @lru_cache
 def get_vectorstore(knowledge_base_name,
                     vs_type,
@@ -49,28 +45,16 @@ def get_vectorstore(knowledge_base_name,
     return vectorstore
 
 
-# vector_store = get_vectorstore(settings.vector_store.name,
-#                                settings.vector_store.type,
-#                                embedding_model)
-
 
 @lru_cache
-def get_llm(model_name, model_engine, ip, port, **kwargs):
-    if model_engine == "nvidia":
+def get_llm(api_key, model_name, base_url, **kwargs):
+    try:
         model = OpenaiCompatibleLLM(model_name=model_name,
-                                    ip=ip,
-                                    port=port)
-    elif model_engine == "openai":
-        openai_api_key = kwargs.get("api_key")
-        if openai_api_key:
-            model = ChatOpenAI(
-                model_name=model_name,
-                openai_api_key=openai_api_key,
-                temperature=0.1
-            )
-        else:
-            raise ValueError(f"please provide valid openai api key when using openai model engine! ")
-    else:
-        raise ValueError(f"{model_engine} is not supported! ")
-    return model
+                                    api_key=api_key,
+                                    base_url=base_url)
+        return model
+    except Exception as e:
+        logger.error(e)
+        raise RuntimeError(f"Please check your llm cfg and make sure the api service is available !")
+
 

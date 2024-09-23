@@ -54,30 +54,15 @@ llm:
   # Type: str
   # ENV Variable: APP_LLM_API_KEY
 
-  ip:
-  # 大模型推理服务IP
+  base_url:
+  # 大模型推理服务url
   # Type: str
-  # ENV Variable: APP_LLM_IP
-
-  port:
-  # 大模型推理服务端口
-  # Type: str
-  # ENV Variable: APP_LLM_PORT
-
-  grpc_port:
-  # 大模型推理服务grpc端口（预留参数，默认无需配置）
-  # Type: str
-  # ENV Variable: APP_LLM_GRPC_PORT
+  # ENV Variable: APP_LLM_BASE_URL
 
   model_name:
   # 大模型名称.
   # Type: str
   # ENV Variable: APP_LLM_MODEL_NAME
-
-  model_engine:
-  # 推理引擎类型（backend），可选项有{nvidia: nv-gpu；openai: openai在线服务}
-  # Type: str
-  # ENV Variable: APP_LLM_MODEL_ENGINE
 
 text_splitter:
   # The configuration for the Text Splitter.

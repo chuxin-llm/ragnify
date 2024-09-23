@@ -12,11 +12,10 @@ from langchain.prompts import PromptTemplate
 from langchain.prompts.chat import ChatPromptTemplate
 
 
+@dataclass
 class GenerateChain(BaseGenerationChain):
-
-    def __init__(self, llm: Union[LLM, BaseChatModel], stream=False):
-        self.llm = llm
-        self.stream = stream
+    llm: Union[LLM, BaseChatModel]
+    stream = False
 
     def augment(self, query: str,
                 docs: List[Document]):

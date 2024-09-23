@@ -36,24 +36,19 @@ def unique_by_key(iterable: Iterable[T], key: Callable[[T], H]) -> Iterator[T]:
             yield e
 
 
+@dataclass
 class RetrievalChain(BaseRetrievalChain):
 
-    def __init__(self,
-                 vectorstore: Optional[VectorStoreBase],
-                 reranker: Reranker = None,
-                 retrievers: List[BaseRetriever] = None,
-                 top_k: int = 5,
-                 score_threshold: Union[None, float] = 0.,
-                 multi_query: bool = False,
-                 route_query: bool = False,
-                 ):
-        self.vectorstore = vectorstore
-        self.reranker = reranker
-        self.retrievers = retrievers
-        self.top_k = top_k
-        self.score_threshold = score_threshold
-        self.multi_query = multi_query
-        self.route_query = route_query
+    vectorstore: Optional[VectorStoreBase]
+    retrievers: List[BaseRetriever] = None
+    top_k: int = 5
+    score_threshold: Union[None, float] = 0.
+    multi_query: bool = False
+    route_query: bool = False
+
+    def __post_init__(self):
+        self.reranker = get_reranker(settings.reranker.model_name_or_path, settings.reranker.type) \
+                if settings.reranker.model_name_or_path and settings.reranker.type else None
 
     def _reciprocal_rank(
         self, doc_lists: List[List[Document]], weights: List[float]=None, k=60

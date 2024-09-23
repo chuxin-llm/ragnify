@@ -103,12 +103,14 @@ Embedding模型用于将文本向量化，支持配置的参数如下：
 
 ### 下载模型
 
-您可以根据实际情况，选择列表中的一个模型进行下载：
+您可以选择下载主流的开源embedding模型，例如：
 
 | 模型名称              | 语言 | 模型链接                                                     |
 | :-------------------- | :--- | :----------------------------------------------------------- |
 | bge-large-zh          | 中文 | [HF国内站（推荐）](https://hf-mirror.com/BAAI/bge-large-zh)  |
 | bce-embedding-base_v1 | 中英 | [HF国内站（推荐）](https://hf-mirror.com/maidalun1020/bce-embedding-base_v1) |
+
+**我们强烈推荐您试用我们自研的[Chuxin-Embedding](https://huggingface.co/chuxin-llm/Chuxin-Embedding)模型**
 
 #### 下载步骤
 
@@ -142,7 +144,7 @@ Embedding模型用于将文本向量化，支持配置的参数如下：
 
    其中：
 
-   - ``<hf_model_name>``：HF站上的模型名称，例如：BAAI/bge-large-zh。
+   - ``<hf_model_name>``：HF站上的模型名称，例如：chuxin-llm/Chuxin-Embedding。
    
    - ``<local_model_dir>``：模型的本地存储路径。
 

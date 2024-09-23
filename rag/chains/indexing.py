@@ -23,19 +23,14 @@ from rag.connector.database.repository.knowledge_file_repository import (
 from rag.connector.database.utils import KnowledgeFile
 
 
+@dataclass
 class IndexingChain(BaseIndexingChain):
 
-    def __init__(self,
-                 vectorstore: VectorStoreBase,
-                 chunk_size: int,
-                 chunk_overlap: int,
-                 zh_title_enhance: bool = False,
-                 multi_vector_param: Dict = None):
-        self.vectorstore = vectorstore
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
-        self.zh_title_enhance = zh_title_enhance
-        self.multi_vector_param = multi_vector_param
+    vectorstore: VectorStoreBase
+    chunk_size: int
+    chunk_overlap: int
+    zh_title_enhance: bool = False
+    multi_vector_param: Dict = None
 
     def load(self,
              file: KnowledgeFile,

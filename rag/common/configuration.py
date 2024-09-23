@@ -56,33 +56,18 @@ class LLMConfig(ConfigWizard):
 
     api_key: str = configfield(
         "api_key",
-        default="",
-        help_txt="OPENAI API kEY.",
+        default="EMPTY",
+        help_txt="API kEY.",
     )
-    ip: str = configfield(
-        "ip",
-        default="0.0.0.0",
-        help_txt="The location of the Triton server hosting the llm model.",
-    )
-    port: str = configfield(
-        "port",
+    base_url: str = configfield(
+        "base_url",
         default="",
-        help_txt="",
-    )
-    grpc_port: str = configfield(
-        "grpc_port",
-        default="",
-        help_txt="",
+        help_txt="The url of the online llm inference service.",
     )
     model_name: str = configfield(
         "model_name",
         default="",
         help_txt="The name of the hosted model.",
-    )
-    model_engine: str = configfield(
-        "model_engine",
-        default="",
-        help_txt="The server type of the hosted model",
     )
 
 

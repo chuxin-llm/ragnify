@@ -29,8 +29,9 @@ class LocalEmbeddings(Embeddings):
 
         logger.info(f"Using {self.model_engine} as model engine to load embeddings")
         if self.model_engine == "huggingface":
-            func_class = HuggingFaceBgeEmbeddings if 'bge' in self.model_name_or_path \
-                            else HuggingFaceEmbeddings
+            func_class = HuggingFaceBgeEmbeddings if any(
+                [key_word in self.model_name_or_path for key_word in ["bge", "Chuxin"]]) \
+                else HuggingFaceEmbeddings
             hf_embeddings = func_class(
                 model_name=self.model_name_or_path,
                 model_kwargs=model_kwargs,
