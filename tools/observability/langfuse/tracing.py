@@ -14,7 +14,6 @@ from rag.connector.utils import get_vectorstore
 from rag.connector.base import llm, embedding_model
 from rag.chains.retrieval import RetrievalChain
 from rag.chains.generate import GenerateChain
-from rag.module.base import reranker
 
 from server.knowledge import KBServiceFactory
 
@@ -31,7 +30,6 @@ vector_store = get_vectorstore(KNOWLEDGE_BASE_NAME,
                                settings.vector_store.type,
                                embedding_model)
 retrieval_chain = RetrievalChain(vectorstore=vector_store,
-                                 reranker=reranker,
                                  score_threshold=0.)
 generate_chain = GenerateChain(llm=llm, stream=False)
 

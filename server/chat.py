@@ -10,7 +10,6 @@ from rag.chains.retrieval import RetrievalChain
 from rag.chains.generate import GenerateChain
 from rag.connector.utils import get_vectorstore
 from rag.connector.base import llm, embedding_model
-from rag.module.base import reranker
 from rag.common.configuration import settings
 
 
@@ -36,7 +35,6 @@ async def knowledge_base_chat(query: str = Body(..., description="用户输入",
 
     # 知识库召回上下文
     retrieval_chain = RetrievalChain(vectorstore=vector_store,
-                                     reranker=reranker,
                                      score_threshold=score_threshold,
                                      top_k=topk)
     docs = [doc["document"] for doc in retrieval_chain.chain(query=query)]

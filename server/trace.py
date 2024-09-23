@@ -15,7 +15,6 @@ from rag.chains.retrieval import RetrievalChain
 from rag.chains.generate import GenerateChain
 from rag.connector.utils import get_vectorstore
 from rag.connector.base import llm, embedding_model
-from rag.module.base import reranker
 
 from server.knowledge import KBServiceFactory
 from server.utils import BaseResponse
@@ -43,7 +42,6 @@ def trace_rag_pipeline(query: str = Body(..., description="用户输入", exampl
                                    embedding_model)
     generate_chain = GenerateChain(llm=llm, stream=False)
     retrieval_chain = RetrievalChain(vectorstore=vector_store,
-                                     reranker=reranker,
                                      score_threshold=0.)
 
     @observe(name="Pre Retrieval")

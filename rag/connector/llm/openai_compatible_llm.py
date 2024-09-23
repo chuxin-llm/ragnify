@@ -8,16 +8,12 @@ from langchain_core.outputs import GenerationChunk
 
 from rag.common.utils import logger
 
-"""
-连接基于NV卡部署的大模型推理服务: (OpenAI-Compatible Server)
-"""
-
 
 class OpenaiCompatibleLLM(LLM):
 
     model_name: str
-    ip: str
-    port: str
+    api_key: str
+    base_url: str
     output_len: int = 1024
 
     def _stream(self,
@@ -26,8 +22,8 @@ class OpenaiCompatibleLLM(LLM):
                 run_manager: Optional[CallbackManagerForLLMRun] = None,
                 **kwargs: Any, ):
         client = OpenAI(
-            api_key="EMPTY",
-            base_url="http://"+self.ip+":"+self.port+"/v1",
+            api_key=self.api_key,
+            base_url=self.base_url
         )
         try:
             response = client.chat.completions.create(
@@ -54,8 +50,8 @@ class OpenaiCompatibleLLM(LLM):
               run_manager: Optional[CallbackManagerForLLMRun] = None,
               **kwargs: Any, ):
         client = OpenAI(
-            api_key="EMPTY",
-            base_url="http://" + self.ip + ":" + self.port + "/v1",
+            api_key=self.api_key,
+            base_url=self.base_url
         )
         try:
             response = client.chat.completions.create(
@@ -75,7 +71,3 @@ class OpenaiCompatibleLLM(LLM):
     def _llm_type(self) -> str:
         """Return type of chat model."""
         return self.model_name
-
-
-
-
