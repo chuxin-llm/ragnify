@@ -1,4 +1,4 @@
-
+from dataclasses import dataclass
 from typing import List, Tuple, Union
 from langchain_core.documents import Document
 

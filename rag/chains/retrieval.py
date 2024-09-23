@@ -1,4 +1,4 @@
-
+from dataclasses import dataclass
 from collections import defaultdict
 from collections.abc import Hashable
 from itertools import chain
@@ -17,15 +17,23 @@ from langchain_core.documents import Document
 from langchain_core.retrievers import BaseRetriever
 
 from rag.chains.base import BaseRetrievalChain
-from rag.common.utils import DocumentWithVSId, logger
+from rag.common.utils import logger
+from rag.common.configuration import settings
 from rag.connector.vectorstore.base import VectorStoreBase
-# from rag.connector.knowledge_graph.base import KnowledgeGraph
-from rag.module.post_retrieval.reranker import Reranker
 from rag.module.pre_retrieval.multi_query import generate_queries
 from rag.module.pre_retrieval.route_query import route_query_to_files
+from rag.module.utils import get_reranker
 
 T = TypeVar("T")
 H = TypeVar("H", bound=Hashable)
+
+
+class DocumentWithVSId(Document):
+    """
+    矢量化后的文档
+    """
+    id: str = None
+    score: float = 3.0
 
 
 def unique_by_key(iterable: Iterable[T], key: Callable[[T], H]) -> Iterator[T]:
@@ -139,7 +147,7 @@ class RetrievalChain(BaseRetrievalChain):
                     f_documents.append(doc)
 
         # rerank by pre-trained model
-        if self.reranker is not None and len(f_documents) > 1:
+        if self.reranker and len(f_documents) > 1:
             f_documents = self.reranker.rank(query, f_documents, self.top_k)
         else:
             f_documents = [{"document": doc} for doc in f_documents]

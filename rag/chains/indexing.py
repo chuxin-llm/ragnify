@@ -1,4 +1,4 @@
-
+from dataclasses import dataclass
 import os
 import uuid
 from typing import List, Union, Tuple, Dict
