@@ -63,9 +63,9 @@ RAGNIFY主要依赖向量数据库和大模型推理服务，这两个服务以�
 
 ## 4. 相关文档
 
-- [部署指南](docs%2Fdeployment.md)：介绍如何安装部署RAGNIFY。
-- [使用指南](docs%2Fservice.md)：介绍如何使用RAGNIFY搭建知识问答系统。
-- [度量指标评估指南](docs%2Fevaluation.md)：介绍如何对RAGNIFY进行度量指标评估。
-- [流程监控指南](docs%2Fobservability.md)：介绍如何对RAGNIFY全流程中的相关信息进行跟踪监控，包括各模块的输入输出、响应时间等。
-- [参数说明](docs%2Fconfiguration.md)：介绍RAGNIFY相关的参数定义。
-- [开发指南](docs%2Fdevelopment.md)：介绍如何自定义功能模块并将它配置到RAGNIFY中。
+- [部署指南](docs/deployment.md)：介绍如何安装部署RAGNIFY。
+- [使用指南](docs/service.md)：介绍如何使用RAGNIFY搭建知识问答系统。
+- [度量指标评估指南](docs/evaluation.md)：介绍如何对RAGNIFY进行度量指标评估。
+- [流程监控指南](docs/observability.md)：介绍如何对RAGNIFY全流程中的相关信息进行跟踪监控，包括各模块的输入输出、响应时间等。
+- [参数说明](docs/configuration.md)：介绍RAGNIFY相关的参数定义。
+- [开发指南](docs/development.md)：介绍如何自定义功能模块并将它配置到RAGNIFY中。

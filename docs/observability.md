@@ -5,7 +5,7 @@ RAGNIFY提供了对RAG应用全流程的监控接口，包含各个子模块的�
 ## 前提条件
 
 - 本接口基于LangFuse实现，需要提前[部署Langfuse](https://langfuse.com/docs/deployment/self-host)、创建`Projects`以及`公钥&私钥`。
-- 根据[部署指南](docs%2Fdeployment.md)中选择的**配置参数**方法的不同，修改[/conf/config.yaml](../conf/config.yaml)或填写新建配置文件（.env格式）的`langchain`子项中的下列参数后，启动后端API服务。
+- 根据[部署指南](deployment.md)中选择的**配置参数**方法的不同，修改[/conf/config.yaml](../conf/config.yaml)或填写新建配置文件（.env格式）的`langchain`子项中的下列参数后，启动后端API服务。
 
   ```text
   langfuse_secret_key               # Langfuse平台项目的密钥
